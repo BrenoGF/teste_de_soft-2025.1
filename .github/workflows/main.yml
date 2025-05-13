@@ -1,0 +1,38 @@
+name: Integração Contínua com Minunit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Fazer o checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Preparar o ambiente para rodar aplicações em C
+    - name: Install build essentials
+      run: sudo apt-get install build-essential
+
+    # Compilar os testes unitarios
+    - name: Build the project (1/4)
+      run: gcc -o contagem_equivalente "Teste de Software - Breno Garcia/test/teste_contagem_equiv.c"
+    - name: Build the project (2/4)
+      run: gcc -o contagem_limite "Teste de Software - Breno Garcia/test/teste_contagem_val-lim.c"
+    - name: Build the project (3/4)
+      run: gcc -o preco_equivalente "Teste de Software - Breno Garcia/test/teste_price_equiv.c"
+    - name: Build the project (4/4)
+      run: gcc -o preco_limite "Teste de Software - Breno Garcia/test/teste_price_val-lim.c"
+
+    # Executar o teste
+    - name: Run tests (1/2)
+      run: ./contagem_equivalente
+    - name: Run tests (2/2)
+      run: ./preco_equivalente
