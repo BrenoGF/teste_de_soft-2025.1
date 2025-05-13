@@ -32,7 +32,11 @@ jobs:
       run: gcc -o preco_limite "Teste de Software - Breno Garcia/test/teste_price_val-lim.c"
 
     # Executar o teste
-    - name: Run tests (1/2)
+    - name: Run tests (1/4)
       run: ./contagem_equivalente
-    - name: Run tests (2/2)
+    - name: Run tests (2/4)
+      run: ./contagem_limite
+    - name: Run tests (3/4)
       run: ./preco_equivalente
+    - name: Run tests (4/4)
+      run: ./preco_limite
